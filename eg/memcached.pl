@@ -11,6 +11,6 @@ $ENV{TEST_MEMCACHED} ||= do {
             die $!;
         }
     );
-    Harriet->save_guard($server);
+    $HARRIET_GUARDS::MEMCACHED = $server;
     '127.0.0.1:' . $server->port;
 };

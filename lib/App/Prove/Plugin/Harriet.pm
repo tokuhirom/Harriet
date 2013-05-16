@@ -15,6 +15,8 @@ sub load {
 1;
 __END__
 
+=for stopwords harriet
+
 =head1 NAME
 
 App::Prove::Plugin::Harriet - Harriet with prove
@@ -30,3 +32,4 @@ This module is a part of L<Harriet>.
 
 This module loads harriet scripts before running tests. And it set environment variables.
 
+Please look L<Harriet> for more details.

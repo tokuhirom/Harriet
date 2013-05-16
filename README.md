@@ -60,8 +60,8 @@ This code runs memcached. It returns memcached's end point information and guard
     $harriet->load('memcached');
     print $ENV{memcached}, "\n";
 
-This script loads end point of memcached daemon. If there is `$ENV{TEST_MEMCACHED}` varaible, just return it.
-Otherwise, harriet loads harriet script named 't/harriet/TEST\_MEMCACHED.pl' and it returns the return value of the script.
+This script load the memcached daemon setup script.
+harriet loads harriet script named 't/harriet/memcached.pl'.
 
 ## Save daemon process under the prove
 

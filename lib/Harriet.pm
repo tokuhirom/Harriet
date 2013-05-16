@@ -5,9 +5,6 @@ use warnings;
 
 our $VERSION = "0.01";
 
-# Storage for the guard objects.
-our @GUARDS;
-
 sub new {
     my ($class, $dir) = @_;
     bless {dir => $dir}, $class;
@@ -23,11 +20,6 @@ sub load {
     if ($@) {
         die "[Harriet] Couldn't parse $file: $@\n";
     }
-}
-
-sub save_guard {
-    my $class = shift;
-    push @GUARDS, @_;
 }
 
 sub load_all {
@@ -46,6 +38,8 @@ sub load_all {
 __END__
 
 =encoding utf-8
+
+=for stopwords harriet groonga
 
 =head1 NAME
 
@@ -109,8 +103,8 @@ This code runs memcached. It returns memcached's end point information and guard
     $harriet->load('memcached');
     print $ENV{memcached}, "\n";
 
-This script loads end point of memcached daemon. If there is C<$ENV{TEST_MEMCACHED}> varaible, just return it.
-Otherwise, harriet loads harriet script named 't/harriet/TEST_MEMCACHED.pl' and it returns the return value of the script.
+This script load the memcached daemon setup script.
+harriet loads harriet script named 't/harriet/memcached.pl'.
 
 =head2 Save daemon process under the prove
 

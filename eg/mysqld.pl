@@ -12,7 +12,7 @@ $ENV{TEST_MYSQL} ||= do {
             'skip-networking' => '', # no TCP socket
         }
     ) or die $Test::mysqld::errstr;
-    Harriet->save_guard($mysqld);
+    $HARRIET_GUARDS::MYSQLD = $mysqld;
     $mysqld->dsn;
 };
 
