@@ -72,6 +72,10 @@ harriet loads harriet script named 't/harriet/memcached.pl'.
 
 This plugin starts daemons before running test cases!
 
+# WHY Harriet?
+
+[Harriet](http://en.wikipedia.org/wiki/Harriet\_(tortoise)) is very long lived tortise. Harriet.pm makes long lived process.
+
 # LICENSE
 
 Copyright (C) tokuhirom.

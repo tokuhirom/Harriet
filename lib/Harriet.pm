@@ -115,6 +115,10 @@ L<App::Prove::Plugin::Harriet> loads harriet scripts under the C<t/harriet/>, an
 
 This plugin starts daemons before running test cases!
 
+=head1 WHY Harriet?
+
+L<Harriet|http://en.wikipedia.org/wiki/Harriet_(tortoise)> is very long lived tortise. Harriet.pm makes long lived process.
+
 =head1 LICENSE
 
 Copyright (C) tokuhirom.
