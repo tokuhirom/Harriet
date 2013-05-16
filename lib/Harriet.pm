@@ -87,7 +87,7 @@ harriet script is just a perl script has C<.pl> extension. Example code is here:
                 die $!;
             }
         );
-        Harriet->save_guard($server);
+        $HARRIET_GUARDS::MEMCACHED = $server;
         '127.0.0.1:' . $server->port;
     };
 

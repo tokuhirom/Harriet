@@ -7,6 +7,6 @@ use Test::STF::MockServer;
 
 $ENV{TEST_STF} ||= do {
     my $stf = Test::STF::MockServer->new();
-    Harriet->save_guard($stf);
+    $HARRIET_GUARDS::STF = $stf;
     $stf->url;
 }
