@@ -1,9 +1,5 @@
-use strict;
-use utf8;
-
-use Test::TCP;
-
 $ENV{TEST_MEMCACHED} ||= do {
+    require Test::TCP;
     my $server = Test::TCP->new(
         code => sub {
             my $port = shift;
