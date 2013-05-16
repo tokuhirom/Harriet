@@ -9,7 +9,7 @@ my $dir = shift or pod2usage;
 my %orig_env = %ENV;
 
 my $harriet = Harriet->new($dir);
-my %vars = $harriet->load_all();
+$harriet->load_all();
 
 print "\n\n";
 while (my ($k, $v) = each %ENV) {
