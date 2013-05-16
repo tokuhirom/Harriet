@@ -19,15 +19,9 @@ sub load {
 
     my $file = "$self->{dir}/${name}.pl";
 
-    my ($retval, @guards) = do $file;
+    my $retval = do $file;
     if ($@) {
         die "[Harriet] Couldn't parse $file: $@\n";
-    }
-    push @GUARDS, @guards;
-    if (ref $retval eq 'HASH') {
-        while (my ($k, $v) = each %$retval) {
-            $ENV{$name} = $retval;
-        }
     }
 }
 
