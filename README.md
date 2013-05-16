@@ -7,9 +7,12 @@ Harriet - Daemon manager for testing
     use Harriet;
 
     my $harriet = Harriet->new('t/harriet/');
-    my $stf_url = $harriet->load('TEST_STF');
+    $harriet->load('stf');
+    print $ENV{TEST_STF}, "\n";
 
 # DESCRIPTION
+
+__(THIS MODULE IS CURRENTLY UNDER DEVELOPMENT.)__
 
 In some case, test code requires daemons like memcached, STF, or groonga.
 If you are running these daemons for each test scripts, it eats lots of time.
@@ -27,19 +30,23 @@ And run the test cases. Test script can use the daemon process (You need to clea
 
 harriet script is just a perl script has `.pl` extension. Example code is here:
 
-    # t/harriet/TEST_MEMCACHED.pl
+    # t/harriet/memcached.pl
     use strict;
     use utf8;
+
     use Test::TCP;
 
-    my $server = Test::TCP->new(
-        code => sub {
-            my $port = shift;
-            exec '/usr/bin/memcached', '-p', $port;
-            die $!;
-        }
-    );
-    return ('127.0.0.1:' . $server->port, $server);
+    $ENV{TEST_MEMCACHED} ||= do {
+        my $server = Test::TCP->new(
+            code => sub {
+                my $port = shift;
+                exec '/usr/bin/memcached', '-p', $port;
+                die $!;
+            }
+        );
+        Harriet->save_guard($server);
+        '127.0.0.1:' . $server->port;
+    };
 
 This code runs memcached. It returns memcached's end point information and guard object. Harriet keeps guard objects while perl process lives.
 
@@ -50,7 +57,8 @@ This code runs memcached. It returns memcached's end point information and guard
     use Harriet;
 
     my $harriet = Harriet->new('t/harriet');
-    my $memcached_endpoint = $harriet->load('TEST_MEMCACHED');
+    $harriet->load('memcached');
+    print $ENV{memcached}, "\n";
 
 This script loads end point of memcached daemon. If there is `$ENV{TEST_MEMCACHED}` varaible, just return it.
 Otherwise, harriet loads harriet script named 't/harriet/TEST\_MEMCACHED.pl' and it returns the return value of the script.
