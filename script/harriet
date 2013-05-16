@@ -6,10 +6,18 @@ use Pod::Usage;
 
 my $dir = shift or pod2usage;
 
+my %orig_env = %ENV;
+
 my $harriet = Harriet->new($dir);
 my %vars = $harriet->load_all();
+
 print "\n\n";
-print $harriet->variables_as_string(%vars) . "\n";
+while (my ($k, $v) = each %ENV) {
+    unless (exists $orig_env{$k}) {
+        print "export $k=$v\n";
+    }
+}
+print "\n\n";
 
 # and long long sleep.
 sleep 10000 while 1;

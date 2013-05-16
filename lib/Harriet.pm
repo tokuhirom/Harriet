@@ -15,44 +15,36 @@ sub new {
 
 sub load {
     my ($self, $name) = @_;
+    return if $self->{loaded}->{$name}++;
 
-    # Do not load $name.pl if the variable was already set.
-    unless ($ENV{$name}) {
-        my $file = "$self->{dir}/${name}.pl";
+    my $file = "$self->{dir}/${name}.pl";
 
-        my ($retval, @guards) = do $file;
-        if ($@) {
-            die "[Harriet] Couldn't parse $file: $@\n";
-        }
-        unless ($retval) {
-            die "[Harriet] Cannot get value from $file.\n";
-        }
-        push @GUARDS, @guards;
-        $ENV{$name} = $retval;
+    my ($retval, @guards) = do $file;
+    if ($@) {
+        die "[Harriet] Couldn't parse $file: $@\n";
     }
-    return $ENV{$name};
+    push @GUARDS, @guards;
+    if (ref $retval eq 'HASH') {
+        while (my ($k, $v) = each %$retval) {
+            $ENV{$name} = $retval;
+        }
+    }
+}
+
+sub save_guard {
+    my $class = shift;
+    push @GUARDS, @_;
 }
 
 sub load_all {
     my ($self) = @_;
-
-    my %result;
 
     opendir my $dh, $self->{dir}
         or die "[Harriet] Cannot open '$self->{dir}' as directory: $!\n";
     while (my $file = readdir($dh)) {
         next unless $file =~ /^(.*)\.pl$/;
         my $name = $1;
-        my $val = $self->load($name);
-        $result{$name} = $val;
-    }
-    return %result;
-}
-
-sub variables_as_string {
-    my ($self, %vars) = @_;
-    for my $key (sort keys %vars) {
-        printf "export %s=%s\n", $key, $vars{$key};
+        $self->load($name);
     }
 }
 
@@ -70,9 +62,12 @@ Harriet - Daemon manager for testing
     use Harriet;
 
     my $harriet = Harriet->new('t/harriet/');
-    my $stf_url = $harriet->load('TEST_STF');
+    $harriet->load('stf');
+    print $ENV{TEST_STF}, "\n";
 
 =head1 DESCRIPTION
+
+B<(THIS MODULE IS CURRENTLY UNDER DEVELOPMENT.)>
 
 In some case, test code requires daemons like memcached, STF, or groonga.
 If you are running these daemons for each test scripts, it eats lots of time.
@@ -90,19 +85,23 @@ And run the test cases. Test script can use the daemon process (You need to clea
 
 harriet script is just a perl script has C<.pl> extension. Example code is here:
 
-    # t/harriet/TEST_MEMCACHED.pl
+    # t/harriet/memcached.pl
     use strict;
     use utf8;
+
     use Test::TCP;
 
-    my $server = Test::TCP->new(
-        code => sub {
-            my $port = shift;
-            exec '/usr/bin/memcached', '-p', $port;
-            die $!;
-        }
-    );
-    return ('127.0.0.1:' . $server->port, $server);
+    $ENV{TEST_MEMCACHED} ||= do {
+        my $server = Test::TCP->new(
+            code => sub {
+                my $port = shift;
+                exec '/usr/bin/memcached', '-p', $port;
+                die $!;
+            }
+        );
+        Harriet->save_guard($server);
+        '127.0.0.1:' . $server->port;
+    };
 
 This code runs memcached. It returns memcached's end point information and guard object. Harriet keeps guard objects while perl process lives.
 
@@ -113,7 +112,8 @@ This code runs memcached. It returns memcached's end point information and guard
     use Harriet;
 
     my $harriet = Harriet->new('t/harriet');
-    my $memcached_endpoint = $harriet->load('TEST_MEMCACHED');
+    $harriet->load('memcached');
+    print $ENV{memcached}, "\n";
 
 This script loads end point of memcached daemon. If there is C<$ENV{TEST_MEMCACHED}> varaible, just return it.
 Otherwise, harriet loads harriet script named 't/harriet/TEST_MEMCACHED.pl' and it returns the return value of the script.

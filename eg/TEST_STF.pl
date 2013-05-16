@@ -5,5 +5,8 @@ use utf8;
 
 use Test::STF::MockServer;
 
-my $stf = Test::STF::MockServer->new();
-return ($stf->url, $stf);
+$ENV{TEST_STF} ||= do {
+    my $stf = Test::STF::MockServer->new();
+    Harriet->save_guard($stf);
+    $stf->url;
+}
