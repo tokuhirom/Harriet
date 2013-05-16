@@ -1,5 +1,5 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "Daemon manager for testing",
    "author" : [
       "tokuhirom <tokuhirom@gmail.com>"
    ],
@@ -42,6 +42,7 @@
       },
       "runtime" : {
          "requires" : {
+            "Pod::Usage" : "0",
             "perl" : "5.008005"
          }
       },
@@ -52,5 +53,16 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/tokuhirom/Harriet/issues"
+      },
+      "homepage" : "https://github.com/tokuhirom/Harriet",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/tokuhirom/Harriet.git",
+         "web" : "https://github.com/tokuhirom/Harriet"
+      }
+   },
    "version" : "0.01"
 }
