@@ -3,7 +3,7 @@ use 5.008005;
 use strict;
 use warnings;
 
-our $VERSION = "0.01";
+our $VERSION = "0.02";
 
 sub new {
     my ($class, $dir) = @_;
@@ -117,7 +117,7 @@ This plugin starts daemons before running test cases!
 
 =head1 WHY Harriet?
 
-L<Harriet|http://en.wikipedia.org/wiki/Harriet_(tortoise)> is very long lived tortise. Harriet.pm makes long lived process.
+L<Harriet|http://en.wikipedia.org/wiki/Harriet_(tortoise)> is very long lived tortoise. Harriet.pm makes long lived process.
 
 =head1 LICENSE
 

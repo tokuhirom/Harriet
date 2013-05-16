@@ -74,7 +74,7 @@ This plugin starts daemons before running test cases!
 
 # WHY Harriet?
 
-[Harriet](http://en.wikipedia.org/wiki/Harriet\_(tortoise)) is very long lived tortise. Harriet.pm makes long lived process.
+[Harriet](http://en.wikipedia.org/wiki/Harriet\_(tortoise)) is very long lived tortoise. Harriet.pm makes long lived process.
 
 # LICENSE
 
