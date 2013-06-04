@@ -14,7 +14,7 @@ $harriet->load_all();
 print "\n\n";
 while (my ($k, $v) = each %ENV) {
     unless (exists $orig_env{$k}) {
-        print "export $k=$v\n";
+        print "export $k='$v'\n";
     }
 }
 print "\n\n";
