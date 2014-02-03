@@ -21,7 +21,7 @@ Then, you need to keep the processes under the test suite.
 
 Harriet solves this issue.
 
-Harriet loads all daemons when starting [prove](http://search.cpan.org/perldoc?prove). And set the daemon's end point to the environment variable.
+Harriet loads all daemons when starting [prove](https://metacpan.org/pod/prove). And set the daemon's end point to the environment variable.
 And run the test cases. Test script can use the daemon process (You need to clear the data if you need.).
 
 # TUTORIAL
@@ -68,13 +68,13 @@ harriet loads harriet script named 't/harriet/memcached.pl'.
     # .proverc
     -PHarriet=t/harriet/
 
-[App::Prove::Plugin::Harriet](http://search.cpan.org/perldoc?App::Prove::Plugin::Harriet) loads harriet scripts under the `t/harriet/`, and set these to environment variables.
+[App::Prove::Plugin::Harriet](https://metacpan.org/pod/App::Prove::Plugin::Harriet) loads harriet scripts under the `t/harriet/`, and set these to environment variables.
 
 This plugin starts daemons before running test cases!
 
 # WHY Harriet?
 
-[Harriet](http://en.wikipedia.org/wiki/Harriet\_(tortoise)) is very long lived tortoise. Harriet.pm makes long lived process.
+[Harriet](http://en.wikipedia.org/wiki/Harriet_(tortoise)) is very long lived tortoise. Harriet.pm makes long lived process.
 
 # LICENSE
 

@@ -2,6 +2,11 @@ Revision history for Perl extension Harriet
 
 {{$NEXT}}
 
+0.04 2014-02-03T07:40:24Z
+
+    - Handle SIGINT on harriet command.
+      (Reported by sugyan++)
+
 0.03 2013-06-04T10:57:49Z
 
     - Fixed shell quoting issues
