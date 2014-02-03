@@ -19,6 +19,8 @@ while (my ($k, $v) = each %ENV) {
 }
 print "\n\n";
 
+$SIG{INT} = sub { die "Received SIGINT." };
+
 # and long long sleep.
 sleep 10000 while 1;
 
