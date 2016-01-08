@@ -12,7 +12,7 @@ Harriet - Daemon manager for testing
 
 # DESCRIPTION
 
-__(THIS MODULE IS CURRENTLY UNDER DEVELOPMENT.)__
+**(THIS MODULE IS CURRENTLY UNDER DEVELOPMENT.)**
 
 In some case, test code requires daemons like memcached, STF, or groonga.
 If you are running these daemons for each test scripts, it eats lots of time.
@@ -74,7 +74,7 @@ This plugin starts daemons before running test cases!
 
 # WHY Harriet?
 
-[Harriet](http://en.wikipedia.org/wiki/Harriet_(tortoise)) is very long lived tortoise. Harriet.pm makes long lived process.
+[Harriet](http://en.wikipedia.org/wiki/Harriet_\(tortoise\)) is very long lived tortoise. Harriet.pm makes long lived process.
 
 # LICENSE
 
@@ -85,4 +85,4 @@ it under the same terms as Perl itself.
 
 # AUTHOR
 
-tokuhirom <tokuhirom@gmail.com>
+tokuhirom &lt;tokuhirom@gmail.com>
