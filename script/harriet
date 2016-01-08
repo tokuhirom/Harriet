@@ -11,6 +11,7 @@ my %orig_env = %ENV;
 my $harriet = Harriet->new($dir);
 $harriet->load_all();
 
+$| = 1;
 print "\n\n";
 while (my ($k, $v) = each %ENV) {
     unless (exists $orig_env{$k}) {
